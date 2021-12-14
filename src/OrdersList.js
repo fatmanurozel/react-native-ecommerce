@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList} from 'react-native';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, FlatList, TextInput } from "react-native";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch('https://northwind.vercel.app/api/orders')
+    fetch("https://northwind.vercel.app/api/orders")
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -13,8 +13,8 @@ export default function Orders() {
   }, []);
 
   const renderItem = ({ item }) => (
-    <Text>
-      {item.shipName} 
+    <Text style={{ padding: 20, backgroundColor: "red", margin: 3 }}>
+      {item.shipName}
     </Text>
   );
 
@@ -23,7 +23,23 @@ export default function Orders() {
       <FlatList
         data={orders}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}></FlatList>
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
+    padding: 8,
+  },
+});

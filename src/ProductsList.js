@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, TextInput } from "react-native";
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -12,7 +12,11 @@ export default function ProductsList() {
       });
   }, []);
 
-  const renderItem = ({ item }) => <Text>{item.name}</Text>;
+  const renderItem = ({ item }) => (
+    <Text style={{ padding: 20, backgroundColor: "orange", margin: 3 }}>
+      {item.name}
+    </Text>
+  );
 
   return (
     <View>
@@ -24,3 +28,12 @@ export default function ProductsList() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, FlatList, TextInput } from "react-native";
-import Constants from "expo-constants";
 
 export default function CategoriesList() {
   const [categories, setCategories] = useState([]);
@@ -20,7 +19,7 @@ export default function CategoriesList() {
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={categories}
         renderItem={renderItem}
@@ -36,12 +35,5 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    padding: 8,
   },
 });

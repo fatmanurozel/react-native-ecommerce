@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList} from 'react-native';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, FlatList, TextInput } from "react-native";
 
 export default function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);
 
   useEffect(() => {
-    fetch('https://northwind.vercel.app/api/suppliers')
+    fetch("https://northwind.vercel.app/api/suppliers")
       .then((res) => res.json())
       .then((data) => {
         setSuppliers(data);
@@ -13,8 +13,15 @@ export default function Suppliers() {
   }, []);
 
   const renderItem = ({ item }) => (
-    <Text>
-      {item.companyName} 
+    <Text
+      style={{
+        padding: 20,
+        backgroundColor: "black",
+        color: "white",
+        margin: 3,
+      }}
+    >
+      {item.companyName}
     </Text>
   );
 
@@ -23,7 +30,17 @@ export default function Suppliers() {
       <FlatList
         data={suppliers}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}></FlatList>
+        keyExtractor={(item) => item.id}
+      ></FlatList>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
