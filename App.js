@@ -1,25 +1,31 @@
 import React from "react";
-import Orders from "./src/OrdersList";
-import Suppliers from "./src/SuppliersList";
-import Products from "./src/ProductsList";
-import Categories from "./src/CategoriesList";
+
+import HomeScreen from "./src/screens/home/HomeScreen";
+import AppTabNavigator from "./src/screens/navigayor/AppTabNavigator";
+import CategoryDetail from "./src/screens/category/CategoryDetail";
 
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <>
       <NavigationContainer>
-        <Tab.Navigator initialRouteName="Categories">
-          <Tab.Screen name="Categories" component={Categories} />
-          <Tab.Screen name="Products" component={Products} />
-          <Tab.Screen name="Suppliers" component={Suppliers} />
-          <Tab.Screen name="Orders" component={Orders} />
-        </Tab.Navigator>
+        <Stack.Navigator initialRouteName="AppTabNavigator">
+          <Stack.Screen
+            name="AppTabNavigator"
+            component={AppTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: "Home Screen" }}
+          />
+          <Stack.Screen name="CategoryDetail" component={CategoryDetail} />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );
