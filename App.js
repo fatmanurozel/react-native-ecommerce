@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList} from 'react-native';
+import React from 'react'
+import Orders from './src/OrdersList';
+import Suppliers from './src/SuppliersList';
+import Products from './src/ProductsList';
 
-export default function App() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch('https://northwind.vercel.app/api/suppliers')
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
-
-  const renderItem = ({ item }) => (
-    <Text>
-      {item.name} 
-    </Text>
-  );
-
+function App() {
   return (
-    <View>
-      <FlatList
-        data={products}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}></FlatList>
-    </View>
-  );
+    <div>
+      <Products/>
+      <Suppliers/>
+      <Orders/>
+    </div>
+  )
 }
+
+export default App
+
 
 
