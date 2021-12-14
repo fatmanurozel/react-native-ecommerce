@@ -6,12 +6,12 @@ import Categories from "./src/CategoriesList";
 
 function App() {
   return (
-    <div>
+    <>
       <Categories />
       <Products />
       <Suppliers />
       <Orders />
-    </div>
+    </>
   );
 }
 
