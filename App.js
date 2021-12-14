@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList} from 'react-native';
 
-
 export default function App() {
   const [products, setProducts] = useState([]);
 
@@ -13,7 +12,6 @@ export default function App() {
       });
   }, []);
 
-  
   const renderItem = ({ item }) => (
     <Text>
       {item.name} 
