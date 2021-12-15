@@ -10,7 +10,7 @@ import {
 
 import { ListItem, Icon } from "react-native-elements";
 
-export default function CategoriesList({ navigation }) {
+export default function CategoryList({ navigation }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 

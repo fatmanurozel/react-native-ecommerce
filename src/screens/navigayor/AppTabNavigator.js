@@ -6,10 +6,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from "../home/HomeScreen";
-import Category from "../category/CategoriesList";
-import Product from "../product/ProductsList";
-import Order from "../order/OrdersList";
-import Supplier from "../supplier/SuppliersList";
+import ProductList from "../product/ProductList";
+import CategoryList from "../category/CategoryList";
+import SupplierList from "../supplier/SupplierList";
+import OrderList from "../order/OrderList"
 
 const Tab = createBottomTabNavigator();
 
@@ -29,44 +29,44 @@ const AppTabNavigator = ({ navigation }) => {
 
       <Tab.Screen
         name="Product"
-        component={Product}
+        component={ProductList}
         options={{
-          tabBarLabel: "Ürünler",
+          tabBarLabel: "Product",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="gift-outline" color={color} size={size} />
+            <Ionicons name="briefcase-outline" color={color} size={size} />
+            ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Order"
+        component={OrderList}
+        options={{
+          tabBarLabel: "Order",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="pricetags-outline" color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
-        name="Cart"
-        component={Order}
+        name="Supplier"
+        component={SupplierList}
         options={{
-          tabBarLabel: "Sepet",
+          tabBarLabel: "Supplier",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cart-outline" color={color} size={size} />
+            <Ionicons name="archive-outline" color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
-        name="Notification"
-        component={Supplier}
+        name="Category"
+        component={CategoryList}
         options={{
-          tabBarLabel: "Bildirimler",
+          tabBarLabel: "Category",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="notifications-outline" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Profil"
-        component={Category}
-        options={{
-          tabBarLabel: "Profil",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" color={color} size={size} />
+            <Ionicons name="reorder-four-outline" color={color} size={size} />
           ),
         }}
       />
