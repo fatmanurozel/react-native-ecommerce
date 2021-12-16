@@ -1,20 +1,18 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState } from 'react'
 
-const SupplierContext = createContext(null);
 
-export const SupplierProvider = ({ children }) => {
-  const [addedSupplier, setAddedSupplier] = useState(0);
+const SupplierContext = createContext(null)
 
-  const values = {
-    addedSupplier,
-    setAddedSupplier,
-  };
+export const SupplierProvider = ({children}) => {
 
-  return (
-    <SupplierContext.Provider value={values}>
-      {children}
-    </SupplierContext.Provider>
-  );
-};
+    const [addedSupplier, setAddedSupplier] = useState(0)
 
-export default SupplierContext;
+    const values = {
+        addedSupplier,
+        setAddedSupplier
+    }
+
+    return <SupplierContext.Provider value={values}>{children}</SupplierContext.Provider>
+}
+
+export default SupplierContext
