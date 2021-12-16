@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 
-
-
 const SupplierList = ({ navigation }) => {
 
     const [supplierList, setSupplierList] = useState([])
@@ -46,12 +44,12 @@ const SupplierList = ({ navigation }) => {
                     )
             }
         </>
-        
+
     )
 }
- 
+
 const styles = StyleSheet.create({
-   
+
     Activity: {
         flex: 1,
         justifyContent: 'center',

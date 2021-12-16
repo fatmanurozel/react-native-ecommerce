@@ -1,15 +1,13 @@
 import { Formik } from 'formik'
 import React, { useContext } from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput} from 'react-native'
 import { Button } from 'react-native-elements'
 import ProductContext from '../../context/ProductContext'
-
-
+import ValidationSchema from "./ProductValidation"
 
 const ProductForm = ({ navigation }) => {
 
     const { addedProduct, setAddedProduct } = useContext(ProductContext)
-
     const submitForm = (values) => {
 
         let requestOptions = {
@@ -24,47 +22,55 @@ const ProductForm = ({ navigation }) => {
         fetch('https://northwind.vercel.app/api/products', requestOptions)
             .then((res) => res.json())
             .then(data => {
-                alert('added product')
+                alert(' product added.')
                 setAddedProduct(() => addedProduct + 1)
             })
     }
 
     return (
         <Formik
-            initialValues={{ id: '',name: '', unitPrice: '',  unitsInStock: '' }}
+            validationSchema={ValidationSchema}
+            initialValues={{ id: '', unitPrice: '', name: '', unitsInStock: '' }}
             onSubmit={values => submitForm(values)}
         >
-            {({ handleChange, handleSubmit, values }) => (
+            {({ handleChange, handleSubmit, values, errors }) => (
                 <View>
-                 
-
                     <TextInput
                         onChangeText={handleChange('id')}
                         value={values.id}
-                        placeholder='add ID'
+                        
+                        placeholder=' ID'
                     />
-                       <TextInput
+                    {errors.id && <Text>{errors.id}</Text>}
+                    <TextInput
                         onChangeText={handleChange('name')}
                         value={values.name}
-                        placeholder='add name'
+                    
+                        placeholder='name'
                     />
-
+                    {errors.name && <Text>{errors.name}</Text>}
+                    
                     <TextInput
                         onChangeText={handleChange('unitPrice')}
                         value={values.unitPrice}
-                        placeholder='add unit price'
+                       
+                        placeholder='unit price'
                     />
+                    {errors.unitPrice && <Text >{errors.unitPrice}</Text>}
 
                     <TextInput
                         onChangeText={handleChange('unitsInStock')}
                         value={values.unitsInStock}
-                        placeholder='add stock'
+                        
+                        placeholder='unit in stock'
                     />
+                    {errors.unitsInStock && <Text >{errors.unitsInStock}</Text>}
 
-                    <Button title='Add Product' onPress={handleSubmit} />
+                    <Button title='Add Product' onPress={handleSubmit}  />
                 </View>
             )}
         </Formik>
     )
 }
+
 export default ProductForm

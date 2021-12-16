@@ -1,9 +1,9 @@
 import { Formik } from 'formik'
 import React, { useContext } from 'react'
-import { View, TextInput } from 'react-native'
+import { View, Text, TextInput} from 'react-native'
 import { Button } from 'react-native-elements'
 import SupplierContext from '../../context/SupplierContext'
-
+import ValidationSchema from "./SupplierValidation"
 
 const SupplierForm = ({ navigation }) => {
 
@@ -16,54 +16,61 @@ const SupplierForm = ({ navigation }) => {
                 'Accept': 'application/json',
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({  id: Number(values.id), companyName: values.companyName, contactName: values.contactName, contactTitle: values.contactTitle })
+            body: JSON.stringify({id: Number(values.id), companyName:values.companyName, contactName:values.contactName,contactTitle:values.contactTitle})
         }
 
-        fetch('https://northwind.vercel.app/api/Supplier', requestOptions)
+        fetch('https://northwind.vercel.app/api/suppliers', requestOptions)
             .then((res) => res.json())
             .then(data => {
-                alert('supplier added...')
-                setAddedSupplier(() => addedSupplier+ 1)
+                alert(' Supplier added.')
+                setAddedSupplier(() => addedSupplier + 1)
             })
     }
 
     return (
         <Formik
+            validationSchema={ValidationSchema}
             initialValues={{ id: '', companyName: '', contactName: '', contactTitle: '' }}
             onSubmit={values => submitForm(values)}
         >
-            {({ handleChange, handleSubmit, values }) => (
+            {({ handleChange, handleSubmit, values, errors }) => (
                 <View>
-                     <TextInput
+                    <TextInput
                         onChangeText={handleChange('id')}
                         value={values.id}
-                        placeholder='ID'
+                        
+                        placeholder=' ID'
                     />
-
+                    {errors.id && <Text>{errors.id}</Text>}
                     <TextInput
                         onChangeText={handleChange('companyName')}
                         value={values.companyName}
+                    
                         placeholder='Company Name'
                     />
-
+                    {errors.companyName && <Text>{errors.companyName}</Text>}
+                    
                     <TextInput
                         onChangeText={handleChange('contactName')}
                         value={values.contactName}
+                       
                         placeholder='Contact Name'
                     />
-                     <TextInput
+                    {errors.contactName && <Text >{errors.contactName}</Text>}
+
+                    <TextInput
                         onChangeText={handleChange('contactTitle')}
                         value={values.contactTitle}
+                        
                         placeholder='Contact Title'
                     />
+                    {errors.contactTitle && <Text >{errors.contactTitle}</Text>}
 
-                    <Button title='Add supplier..' onPress={handleSubmit}/>
+                    <Button title='Add Supplier' onPress={handleSubmit}  />
                 </View>
             )}
         </Formik>
     )
 }
-
-
 
 export default SupplierForm
