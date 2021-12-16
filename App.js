@@ -15,8 +15,13 @@ import SupplierDetail from "./src/screens/supplier/SupplierDetail";
 import OrderList from "./src/screens/order/OrderList";
 
 
+
 import CategoryDetail from "./src/screens/category/CategoryDetail";
 import CategoryList from "./src/screens/category/CategoryList";
+import OrderDetail from "./src/screens/order/OrderDetail";
+OrderDetail
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +44,7 @@ function App() {
   <Stack.Screen name='SupplierForm' component={SupplierForm} options={{title:'add new supplier'}} />
 
   <Stack.Screen name='OrderList' component={OrderList} />
+  <Stack.Screen name='OrderDetail' component={OrderList} />
 
 
   <Stack.Screen name='CategoryList' component={CategoryList} />
