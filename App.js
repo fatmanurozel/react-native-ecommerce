@@ -18,6 +18,9 @@ import CategoryDetail from "./src/screens/category/CategoryDetail";
 import CategoryList from "./src/screens/category/CategoryList";
 import { ProductProvider } from "./src/context/ProductContext";
 import { SupplierProvider } from "./src/context/SupplierContext";
+import OrderDetail from "./src/screens/order/OrderDetail";
+
+
 
 const Stack = createNativeStackNavigator();
 
