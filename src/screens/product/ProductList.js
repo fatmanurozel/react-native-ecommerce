@@ -3,7 +3,6 @@ import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-nat
 import { Button, Card } from 'react-native-elements'
 
 
-
 const ProductList = ({ navigation }) => {
 
     const [productList, setProductList] = useState([])

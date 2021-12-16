@@ -1,12 +1,13 @@
 import { Formik } from 'formik'
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, TextInput } from 'react-native'
 import { Button } from 'react-native-elements'
-
+import SupplierContext from '../../context/SupplierContext'
 
 
 const SupplierForm = ({ navigation }) => {
 
+    const { addedProduct, setAddedProduct } = useContext(ProductContext)
     const submitForm = (values) => {
 
         let requestOptions = {
