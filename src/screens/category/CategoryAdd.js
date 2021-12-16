@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { Button } from "react-native-elements";
 
 function CategoryAdd() {
-  return <View></View>;
+  return <View>test</View>;
 }
 
 export default CategoryAdd;
