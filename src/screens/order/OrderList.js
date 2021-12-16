@@ -24,14 +24,6 @@ export default function Order() {
         data={orders}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-
-
-
-
-
-
-
-        
       />
     </View>
   );
