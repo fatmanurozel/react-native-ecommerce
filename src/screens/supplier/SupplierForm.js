@@ -1,67 +1,73 @@
-import { Formik } from 'formik'
-import React from 'react'
-import { View, TextInput } from 'react-native'
-import { Button } from 'react-native-elements'
-
-
+import { Formik } from "formik";
+import React, { useContext } from "react";
+import { View, TextInput } from "react-native";
+import { Button } from "react-native-elements";
+import SupplierContext from "../../context/SupplierContext";
 
 const SupplierForm = ({ navigation }) => {
+  const { addedProduct, setAddedProduct } = useContext(ProductContext);
+  const submitForm = (values) => {
+    let requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: Number(values.id),
+        companyName: values.companyName,
+        contactName: values.contactName,
+        contactTitle: values.contactTitle,
+      }),
+    };
 
-    const submitForm = (values) => {
+    fetch("https://northwind.vercel.app/api/Supplier", requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        alert("supplier added...");
+      });
+  };
 
-        let requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({  id: Number(values.id), companyName: values.companyName, contactName: values.contactName, contactTitle: values.contactTitle })
-        }
+  return (
+    <Formik
+      initialValues={{
+        id: "",
+        companyName: "",
+        contactName: "",
+        contactTitle: "",
+      }}
+      onSubmit={(values) => submitForm(values)}
+    >
+      {({ handleChange, handleSubmit, values }) => (
+        <View>
+          <TextInput
+            onChangeText={handleChange("id")}
+            value={values.id}
+            placeholder="ID"
+          />
 
-        fetch('https://northwind.vercel.app/api/Supplier', requestOptions)
-            .then((res) => res.json())
-            .then(data => {
-                alert('supplier added...')
-            })
-    }
+          <TextInput
+            onChangeText={handleChange("companyName")}
+            value={values.companyName}
+            placeholder="Company Name"
+          />
 
-    return (
-        <Formik
-            initialValues={{ id: '', companyName: '', contactName: '', contactTitle: '' }}
-            onSubmit={values => submitForm(values)}
-        >
-            {({ handleChange, handleSubmit, values }) => (
-                <View>
-                     <TextInput
-                        onChangeText={handleChange('id')}
-                        value={values.id}
-                        placeholder='ID'
-                    />
+          <TextInput
+            onChangeText={handleChange("contactName")}
+            value={values.contactName}
+            placeholder="Contact Name"
+          />
+          <TextInput
+            onChangeText={handleChange("contactTitle")}
+            value={values.contactTitle}
+            placeholder="Contact Title"
+          />
 
-                    <TextInput
-                        onChangeText={handleChange('companyName')}
-                        value={values.companyName}
-                        placeholder='Company Name'
-                    />
+          <Button title="Add supplier.." onPress={handleSubmit} />
+        </View>
+      )}
+    </Formik>
+  );
+};
 
-                    <TextInput
-                        onChangeText={handleChange('contactName')}
-                        value={values.contactName}
-                        placeholder='Contact Name'
-                    />
-                     <TextInput
-                        onChangeText={handleChange('contactTitle')}
-                        value={values.contactTitle}
-                        placeholder='Contact Title'
-                    />
-
-                    <Button title='Add supplier..' onPress={handleSubmit}/>
-                </View>
-            )}
-        </Formik>
-    )
-}
-
-
-
-export default SupplierForm
+export default SupplierForm;

@@ -1,9 +1,12 @@
 import { Formik } from "formik";
-import React from "react";
-import { View, TextInput } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
+import ProductContext from "../../context/ProductContext";
 
 const ProductForm = ({ navigation }) => {
+  const { addedProduct, setAddedProduct } = useContext(ProductContext);
+
   const submitForm = (values) => {
     let requestOptions = {
       method: "POST",
@@ -12,8 +15,8 @@ const ProductForm = ({ navigation }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        id: Number(values.id),
         name: values.name,
+        id: Number(values.id),
         unitPrice: Number(values.unitPrice),
         unitsInStock: Number(values.unitsInStock),
       }),
@@ -22,7 +25,8 @@ const ProductForm = ({ navigation }) => {
     fetch("https://northwind.vercel.app/api/products", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        alert("product added..");
+        alert("added product");
+        setAddedProduct(() => addedProduct + 1);
       });
   };
 
@@ -36,24 +40,24 @@ const ProductForm = ({ navigation }) => {
           <TextInput
             onChangeText={handleChange("id")}
             value={values.id}
-            placeholder="ID"
+            placeholder="add ID"
           />
           <TextInput
             onChangeText={handleChange("name")}
             value={values.name}
-            placeholder="Name"
+            placeholder="add name"
           />
 
           <TextInput
             onChangeText={handleChange("unitPrice")}
             value={values.unitPrice}
-            placeholder="Unit Price"
+            placeholder="add unit price"
           />
 
           <TextInput
             onChangeText={handleChange("unitsInStock")}
             value={values.unitsInStock}
-            placeholder="Stock"
+            placeholder="add stock"
           />
 
           <Button title="Add Product" onPress={handleSubmit} />
@@ -62,5 +66,4 @@ const ProductForm = ({ navigation }) => {
     </Formik>
   );
 };
-
 export default ProductForm;

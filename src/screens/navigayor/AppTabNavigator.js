@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Text } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,11 +9,14 @@ import HomeScreen from "../home/HomeScreen";
 import ProductList from "../product/ProductList";
 import CategoryList from "../category/CategoryList";
 import SupplierList from "../supplier/SupplierList";
-import OrderList from "../order/OrderList"
-
+import OrderList from "../order/OrderList";
+import ProductContext from "../../context/ProductContext";
+import SupplierContext from "../../context/ProductContext";
 const Tab = createBottomTabNavigator();
 
 const AppTabNavigator = ({ navigation }) => {
+  const { addedProduct } = useContext(ProductContext);
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -34,7 +37,8 @@ const AppTabNavigator = ({ navigation }) => {
           tabBarLabel: "Product",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="briefcase-outline" color={color} size={size} />
-            ),
+          ),
+          tabBarBadge: addedProduct,
         }}
       />
 
@@ -57,6 +61,7 @@ const AppTabNavigator = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="archive-outline" color={color} size={size} />
           ),
+          tabBarBadge: addedSupplier,
         }}
       />
 
