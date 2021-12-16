@@ -58,6 +58,7 @@ function App() {
               />
 
               <Stack.Screen name="OrderList" component={OrderList} />
+              <Stack.Screen name="OrderDetail" component={OrderDetail} />
 
               <Stack.Screen name="CategoryList" component={CategoryList} />
               <Stack.Screen name="CategoryDetail" component={CategoryDetail} />
