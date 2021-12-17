@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, Card } from "react-native-elements";
 
 import {
   View,
@@ -25,6 +26,12 @@ export default function CategoryList({ navigation }) {
 
   return (
     <View>
+      <View>
+        <Button
+          title="Add New Category"
+          onPress={() => navigation.navigate("CategoryForm")}
+        />
+      </View>
       {loading == true ? (
         <View style={[styles.container, styles.horizontal]}>
           <ActivityIndicator size="small" color="#0000ff" />

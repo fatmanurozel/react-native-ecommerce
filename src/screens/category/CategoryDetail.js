@@ -1,16 +1,34 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Card } from "react-native-elements";
 
-import { PricingCard } from "react-native-elements/dist/pricing/PricingCard";
-
-const ProductDetail = ({ navigation, route }) => {
+const CategoryDetail = ({ navigation, route }) => {
   const { categoryItem } = route.params;
 
   return (
-    <>
-      <Text>{categoryItem.name}</Text>
-    </>
+    <Card>
+      <Card.Title>{categoryItem.name}</Card.Title>
+      <Card.Divider />
+      <View style={styles.cardContent}>
+        <Text>
+          <span style={{ fontWeight: "700" }}>ID: </span> {categoryItem?.id}
+        </Text>
+        <Text>
+          <span style={{ fontWeight: "700" }}>Description: </span>
+          {categoryItem?.description}
+        </Text>
+      </View>
+    </Card>
   );
 };
 
-export default ProductDetail;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  cardContent: {
+    alignItems: "left",
+  },
+});
+
+export default CategoryDetail;

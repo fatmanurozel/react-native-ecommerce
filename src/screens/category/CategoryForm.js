@@ -2,11 +2,11 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import { View, Text, TextInput } from "react-native";
 import { Button } from "react-native-elements";
-import ProductContext from "../../context/ProductContext";
-import ValidationSchema from "./ProductValidation";
+import CategoryContext from "../../context/CategoryContext";
+import ValidationSchema from "./CategoryValidation";
 
-const ProductForm = ({ navigation }) => {
-  const { addedProduct, setAddedProduct } = useContext(ProductContext);
+const CategoryForm = ({ navigation }) => {
+  const { addedCategory, setAddedCategory } = useContext(CategoryContext);
   const submitForm = (values) => {
     let requestOptions = {
       method: "POST",
@@ -15,25 +15,24 @@ const ProductForm = ({ navigation }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: values.name,
         id: Number(values.id),
-        unitPrice: Number(values.unitPrice),
-        unitsInStock: Number(values.unitsInStock),
+        name: values.name,
+        description: values.description,
       }),
     };
 
-    fetch("https://northwind.vercel.app/api/products", requestOptions)
+    fetch("https://northwind.vercel.app/api/categories", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        alert(" product added.");
-        setAddedProduct(() => addedProduct + 1);
+        alert(" category added.");
+        setAddedCategory(() => addedCategory + 1);
       });
   };
 
   return (
     <Formik
       validationSchema={ValidationSchema}
-      initialValues={{ id: "", unitPrice: "", name: "", unitsInStock: "" }}
+      initialValues={{ id: "", description: "", name: "" }}
       onSubmit={(values) => submitForm(values)}
     >
       {({ handleChange, handleSubmit, values, errors }) => (
@@ -52,24 +51,17 @@ const ProductForm = ({ navigation }) => {
           {errors.name && <Text>{errors.name}</Text>}
 
           <TextInput
-            onChangeText={handleChange("unitPrice")}
-            value={values.unitPrice}
-            placeholder="unit price"
+            onChangeText={handleChange("description")}
+            value={values.description}
+            placeholder="description"
           />
-          {errors.unitPrice && <Text>{errors.unitPrice}</Text>}
+          {errors.description && <Text>{errors.description}</Text>}
 
-          <TextInput
-            onChangeText={handleChange("unitsInStock")}
-            value={values.unitsInStock}
-            placeholder="unit in stock"
-          />
-          {errors.unitsInStock && <Text>{errors.unitsInStock}</Text>}
-
-          <Button title="Add Product" onPress={handleSubmit} />
+          <Button title="Add Category" onPress={handleSubmit} />
         </View>
       )}
     </Formik>
   );
 };
 
-export default ProductForm;
+export default CategoryForm;
