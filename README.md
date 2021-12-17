@@ -45,4 +45,4 @@ Sunucuyu çalıştırın
 - rkymtc
   
 ## Lisans
-
+[MIT](https://choosealicense.com/licenses/mit/)
