@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput,StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import SupplierContext from "../../context/SupplierContext";
 import ValidationSchema from "./SupplierValidation";
@@ -46,31 +46,39 @@ const SupplierForm = ({ navigation }) => {
           <TextInput
             onChangeText={handleChange("id")}
             value={values.id}
+            style={styles.input}
+
             placeholder=" ID"
           />
-          {errors.id && <Text>{errors.id}</Text>}
+          {errors.id && <Text style={styles.errors}>{errors.id}</Text>}
           <TextInput
             onChangeText={handleChange("companyName")}
             value={values.companyName}
+            style={styles.input}
+
             placeholder="Company Name"
           />
-          {errors.companyName && <Text>{errors.companyName}</Text>}
+          {errors.companyName && <Text style={styles.errors}>{errors.companyName}</Text>}
 
           <TextInput
             onChangeText={handleChange("contactName")}
             value={values.contactName}
+            style={styles.input}
+
             placeholder="Contact Name"
           />
-          {errors.contactName && <Text>{errors.contactName}</Text>}
+          {errors.contactName && <Text style={styles.errors}>{errors.contactName}</Text>}
 
           <TextInput
             onChangeText={handleChange("contactTitle")}
             value={values.contactTitle}
+            style={styles.input}
+
             placeholder="Contact Title"
           />
-          {errors.contactTitle && <Text>{errors.contactTitle}</Text>}
+          {errors.contactTitle && <Text style={styles.errors}>{errors.contactTitle}</Text>}
 
-          <Button title="Add Supplier" onPress={handleSubmit} />
+          <Button title="Add Supplier" onPress={handleSubmit}style={styles.button} />
         </View>
       )}
     </Formik>
@@ -78,3 +86,27 @@ const SupplierForm = ({ navigation }) => {
 };
 
 export default SupplierForm;
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    width:300,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    textAlign: "center",
+  },
+  errors:{
+    color:'#e50606',
+    fontSize: 16,
+    
+    
+  },
+  button:{
+    height: 40,
+    width:300,
+    margin: 12,
+    padding: 10,
+  }
+ 
+});

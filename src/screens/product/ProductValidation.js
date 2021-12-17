@@ -1,6 +1,9 @@
 import * as yup from "yup";
+
 const ValidationSchema = yup.object().shape({
-  name: yup.string().required("Name is required"),
+  
+ 
+  name: yup.string().required("Name is required") ,
 
   id: yup.number().required("ID is required"),
 

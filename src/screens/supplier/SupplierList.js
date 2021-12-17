@@ -32,26 +32,27 @@ const SupplierList = ({ navigation }) => {
           <View>
             <Button
               title="Add New Supplier"
-              onPress={() => navigation.navigate("SupplierForm")}
+              onPress={() => navigation.navigate("SupplierForm")} style={styles.addButton}
             />
           </View>
 
           {supplierList &&
             supplierList.map((item, key) => (
               <Card key={key}>
-                <Card.Title>{item.companyName}</Card.Title>
+                <View style={styles.card}>
+                <Card.Title style={styles.title}>{item.companyName}</Card.Title>
                 <Card.Divider />
                 <View>
-                  <Text>Contact Name: {item.contactName}</Text>
-                  <Text>Contact Title: {item.contactTitle}</Text>
+                  
                   <Button
-                    title="Go To Detail"
+                    title="supplier detail"
                     onPress={() =>
                       navigation.navigate("SupplierDetail", {
                         supplierItem: item,
                       })
-                    }
+                    }style={styles.button}
                   />
+                </View>
                 </View>
               </Card>
             ))}
@@ -66,7 +67,37 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+
   },
+  title: {
+    height: 40,
+    width: 300,
+    margin: 12,
+    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+  button: {
+    height: 40,
+    width: 150,
+    margin: 12,
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+  card:{
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
+  },
+  addButton:{
+    height: 40,
+    width: 300,
+    margin: 12,
+    padding: 10,
+  
+  }
 });
 
 export default SupplierList;
+
