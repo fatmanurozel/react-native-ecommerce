@@ -1,45 +1,72 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, FlatList, TextInput } from "react-native";
+import React, { useContext, useEffect, useState } from 'react'
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native'
+import { Button, Card } from 'react-native-elements'
 
-export default function Order() {
-  const [orders, setOrders] = useState([]);
+
+
+const OrderList = ({ navigation }) => {
+
+  const [orderList, setOrderList] = useState([])
+  const [loading, setLoading] = useState(false)
+  
 
   useEffect(() => {
-    fetch("https://northwind.vercel.app/api/orders")
-      .then((res) => res.json())
-      .then((data) => {
-        setOrders(data);
-      });
-  }, []);
 
-  const renderItem = ({ item }) => (
-    <Text style={{ padding: 20, backgroundColor: "red", margin: 3 }}>
-      {item.shipName}
-    </Text>
-  );
+    fetch('https://northwind.vercel.app/api/orders')
+      .then((res) => res.json())
+      .then(data => {
+        setOrderList(data)
+        setLoading(true)
+        
+      })
+
+  }, [orderList])
 
   return (
-    <View>
-      <FlatList
-        data={orders}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
-  );
-}
+    <>
+      {
+        
+        loading == false ? (<View style={styles.Activity}><ActivityIndicator size="xxlarge" color="#285abf" /></View>)
+        :  (
+           
+  
+          <ScrollView style={styles.container}>
+            <View style={styles.addButtonContainer}><Button title='Add New Order' onPress={() => navigation.navigate('OrderForm')} buttonStyle={styles.addButton} /></View>
+            {
+              orderList && orderList.map((item, key) => (
+                <Card key={key}>
+                  <Card.Title>{item.customerId}</Card.Title>
+                  <Card.Divider />
+                  <View style={styles.cardContent}>
+                    <Text>Freight: {item.freight}</Text>
+                    <Text>Country: {item?.shipAddress?.country}</Text>
+                    <Button title='Go To Detail' onPress={() => navigation.navigate('OrderDetail', { orderItem: item })}></Button>
+
+                  </View>
+                </Card>))
+        }
+            
+          </ScrollView>
+          )
+          }
+        
+  
+          
+          
+          </>
+
+  )
+  }
+
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  container: {
+
+  Activity: {
     flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
-    padding: 8,
-  },
-});
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
+})
+
+export default OrderList
