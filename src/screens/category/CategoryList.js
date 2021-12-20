@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Alert,
 } from "react-native";
 
 import { ListItem, Icon } from "react-native-elements";
@@ -24,8 +25,18 @@ export default function CategoryList({ navigation }) {
       });
   }, []);
 
+  const categoryDelete = (id) => {
+    fetch("https://northwind.vercel.app/api/categories/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        setCategories(categories.filter((category) => category.id !== id));
+      });
+  };
+
   return (
-    <View>
+    <>
       <View>
         <Button
           title="Add New Category"
@@ -53,12 +64,24 @@ export default function CategoryList({ navigation }) {
                     <ListItem.Title>{item.name}</ListItem.Title>
                   </ListItem.Content>
                   <ListItem.Chevron />
+                  <Button
+                    title="Delete Category"
+                    buttonStyle={{ backgroundColor: "rgba(214, 61, 57, 1)" }}
+                    containerStyle={{
+                      height: 40,
+                      width: 200,
+                      marginHorizontal: 50,
+                      marginVertical: 10,
+                    }}
+                    titleStyle={{ color: "white", marginHorizontal: 20 }}
+                    onPress={() => categoryDelete(item.id)}
+                  />
                 </ListItem>
               </TouchableOpacity>
             ))}
         </ScrollView>
       )}
-    </View>
+    </>
   );
 }
 

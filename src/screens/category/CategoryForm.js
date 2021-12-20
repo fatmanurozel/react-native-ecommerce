@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import CategoryContext from "../../context/CategoryContext";
 import ValidationSchema from "./CategoryValidation";
@@ -16,8 +16,8 @@ const CategoryForm = ({ navigation }) => {
       },
       body: JSON.stringify({
         id: Number(values.id),
-        name: values.name,
         description: values.description,
+        name: values.name,
       }),
     };
 
@@ -41,12 +41,14 @@ const CategoryForm = ({ navigation }) => {
             onChangeText={handleChange("id")}
             value={values.id}
             placeholder=" ID"
+            style={styles.text}
           />
           {errors.id && <Text>{errors.id}</Text>}
           <TextInput
             onChangeText={handleChange("name")}
             value={values.name}
             placeholder="name"
+            style={styles.text}
           />
           {errors.name && <Text>{errors.name}</Text>}
 
@@ -54,6 +56,7 @@ const CategoryForm = ({ navigation }) => {
             onChangeText={handleChange("description")}
             value={values.description}
             placeholder="description"
+            style={styles.text}
           />
           {errors.description && <Text>{errors.description}</Text>}
 
@@ -63,5 +66,17 @@ const CategoryForm = ({ navigation }) => {
     </Formik>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  text: {
+    backgroundColor: "white",
+    marginTop: 10,
+    padding: 10,
+    height: 40,
+  },
+});
 
 export default CategoryForm;
