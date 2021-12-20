@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import React, { useContext } from 'react'
-import { View, Text, TextInput} from 'react-native'
+import { View, Text, TextInput,StyleSheet} from 'react-native'
 import { Button } from 'react-native-elements'
 import OrderContext from '../../context/OrderContext'
 import ValidationSchema from "./OrderValidation"
@@ -74,4 +74,28 @@ const OrderForm = ({ navigation }) => {
     )
 }
 
+
 export default OrderForm
+const styles = StyleSheet.create({
+    input: {
+      height: 40,
+      width:300,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      textAlign: "center",
+    },
+    errors:{
+      color:'#e50606',
+      fontSize: 16,
+      
+      
+    },
+    button:{
+      height: 40,
+      width:300,
+      margin: 12,
+      padding: 10,
+    }
+   
+  });

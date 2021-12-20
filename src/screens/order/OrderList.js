@@ -59,13 +59,38 @@ const OrderList = ({ navigation }) => {
   }
 
 
-const styles = StyleSheet.create({
-
-  Activity: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+  const styles = StyleSheet.create({
+    Activity: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    title: {
+      height: 40,
+      width: 300,
+      margin: 12,
+      textAlign: "center",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    button: {
+      height: 40,
+      width: 150,
+      margin: 12,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    card: {
+      flex: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    addButton: {
+      height: 40,
+      width: 300,
+      margin: 12,
+      padding: 10,
+    },
 
 })
 
