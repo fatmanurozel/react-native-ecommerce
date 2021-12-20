@@ -23,6 +23,10 @@ import { SupplierProvider } from "./src/context/SupplierContext";
 import { CategoryProvider } from "./src/context/CategoryContext";
 import OrderDetail from "./src/screens/order/OrderDetail";
 
+import { OrderProvider } from "./src/context/OrderContext";
+import OrderForm from "./src/screens/order/OrderForm";
+
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -30,6 +34,7 @@ function App() {
     <>
       <CategoryProvider>
         <ProductProvider>
+          <OrderProvider>
           <SupplierProvider>
             <NavigationContainer>
               <Stack.Navigator initialRouteName="AppTabNavigator">
@@ -64,6 +69,11 @@ function App() {
 
                 <Stack.Screen name="OrderList" component={OrderList} />
                 <Stack.Screen name="OrderDetail" component={OrderDetail} />
+                <Stack.Screen
+                  name="OrderForm"
+                  component={OrderForm}
+                  options={{ title: "add new order" }}
+                />
 
                 <Stack.Screen name="CategoryList" component={CategoryList} />
                 <Stack.Screen
@@ -78,6 +88,7 @@ function App() {
               </Stack.Navigator>
             </NavigationContainer>
           </SupplierProvider>
+          </OrderProvider>
         </ProductProvider>
       </CategoryProvider>
     </>
