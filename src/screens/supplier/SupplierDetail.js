@@ -14,7 +14,7 @@ const SupplierDetail = ({ navigation, route }) => {
         <Text>Contact Name: {supplierItem?.contactName}</Text>
         <Text>Contact Title: {supplierItem?.contactTitle}</Text>
         <Text>
-          Address:{" "}
+          Address:{"  "}
           {`street: ${supplierItem?.address.street}  
                 city: ${supplierItem?.address.city} 
                 country: ${supplierItem?.address.country} 

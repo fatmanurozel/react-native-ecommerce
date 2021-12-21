@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
-import { View, Text, TextInput,StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import SupplierContext from "../../context/SupplierContext";
 import ValidationSchema from "./SupplierValidation";
@@ -35,9 +35,9 @@ const SupplierForm = ({ navigation }) => {
       validationSchema={ValidationSchema}
       initialValues={{
         id: "",
-        companyName: "",
-        contactName: "",
-        contactTitle: "",
+        companyName: " ",
+        contactName: " ",
+        contactTitle: " ",
       }}
       onSubmit={(values) => submitForm(values)}
     >
@@ -78,7 +78,7 @@ const SupplierForm = ({ navigation }) => {
           />
           {errors.contactTitle && <Text style={styles.errors}>{errors.contactTitle}</Text>}
 
-          <Button title="Add Supplier" onPress={handleSubmit}style={styles.button} />
+          <Button title="Add Supplier" onPress={handleSubmit} style={styles.button} />
         </View>
       )}
     </Formik>
@@ -90,23 +90,23 @@ export default SupplierForm;
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    width:300,
+    width: 300,
     margin: 12,
     borderWidth: 1,
     padding: 10,
     textAlign: "center",
   },
-  errors:{
-    color:'#e50606',
+  errors: {
+    color: '#e50606',
     fontSize: 16,
-    
-    
+
+
   },
-  button:{
+  button: {
     height: 40,
-    width:300,
+    width: 300,
     margin: 12,
     padding: 10,
   }
- 
+
 });

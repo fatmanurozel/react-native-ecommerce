@@ -7,10 +7,10 @@ import { Button, Card } from 'react-native-elements'
 const SupplierList = ({ navigation }) => {
 
   const [supplierList, setSupplierList] = useState([])
-  const [loading, setloading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [searchName, setSearchName] = useState('')
-  const [nameSortToggle, setNameSortToggle] = useState(false)
-  const [idSortToggle, setIdSortToggle] = useState(false)
+  const [nameSort, setNameSort] = useState(false)
+  const [idSort, setIdSort] = useState(false)
 
   useEffect(() => {
     setSupplier();
@@ -21,7 +21,7 @@ const SupplierList = ({ navigation }) => {
       .then((res) => res.json())
       .then(data => {
         setSupplierList(data)
-        setloading(true)
+        setLoading(true)
       })
   }
 
@@ -32,7 +32,7 @@ const SupplierList = ({ navigation }) => {
           text: 'Yes',
           onPress: () => {
 
-            setloading(false)
+            setLoading(false)
 
             const requestOptions = {
               method: 'DELETE',
@@ -52,7 +52,7 @@ const SupplierList = ({ navigation }) => {
           text: 'No',
           onPress: () => { }
         }])
-  const searchByName = (companyName) => {
+  const searchCompanyName = (companyName) => {
     companyName = companyName.toLowerCase()
     setSearchName(companyName)
     fetch('https://northwind.vercel.app/api/suppliers')
@@ -64,25 +64,25 @@ const SupplierList = ({ navigation }) => {
   }
 
   const sortSupplierName = () => {
-    setNameSortToggle(!nameSortToggle)
-    if (nameSortToggle == true) {
-      let sortedSupplierByName = _.orderBy(supplierList, ['companyName'], ['asc'])
-      setSupplierList(sortedSupplierByName)
+    setNameSort(!nameSort)
+    if (nameSort == true) {
+      let sortedSupplierName = _.orderBy(supplierList, ['companyName'], ['asc'])
+      setSupplierList(sortedSupplierName)
     }
     else {
-      let sortedSupplierByName = _.orderBy(supplierList, ['companyName'], ['desc'])
-      setSupplierList(sortedSupplierByName)
+      let sortedSupplierName = _.orderBy(supplierList, ['companyName'], ['desc'])
+      setSupplierList(sortedSupplierName)
     }
   }
-  const sortId = () => {
-    setIdSortToggle(!idSortToggle)
-    if (idSortToggle == true) {
-      let sortedSupplierById = _.orderBy(supplierList, ['id'], ['asc'])
-      setSupplierList(sortedSupplierById)
+  const sortSupplierId = () => {
+    setIdSort(!idSort)
+    if (idSort == true) {
+      let sortedSupplierId = _.orderBy(supplierList, ['id'], ['asc'])
+      setSupplierList(sortedSupplierId)
     }
     else {
-      let sortedSupplierById = _.orderBy(supplierList, ['id'], ['desc'])
-      setSupplierList(sortedSupplierById)
+      let sortedSupplierId = _.orderBy(supplierList, ['id'], ['desc'])
+      setSupplierList(sortedSupplierId)
     }
   }
 
@@ -93,20 +93,20 @@ const SupplierList = ({ navigation }) => {
         loading == false ? (<View style={styles.loadingContainer}><ActivityIndicator size="large" color="#0000ff" /></View>)
 
           : (
-            <ScrollView style={styles.container}>
+            <ScrollView>
               <View>
                 <Button
                   title="Add New Supplier"
                   onPress={() => navigation.navigate("SupplierForm")} style={styles.addButton}
                 />
               </View>
-              <View style={styles.sortContainer}>
+              <View>
                 <Button title='Sort by Name' onPress={() => sortSupplierName()} buttonStyle={styles.button} />
-                <Button title='Sort by ID' onPress={() => sortId()} buttonStyle={styles.button} />
+                <Button title='Sort by ID' onPress={() => sortSupplierId()} buttonStyle={styles.button} />
               </View>
-              <View style={styles.searchContainer}>
+              <View>
                 <TextInput
-                  onChangeText={(e) => searchByName(e)}
+                  onChangeText={(e) => searchCompanyName(e)}
                   style={styles.input}
                   placeholder='Search by name...'
                 />
@@ -128,7 +128,6 @@ const SupplierList = ({ navigation }) => {
                             })
                           } style={styles.button}
                         />
-
 
                         <Button title='X' onPress={() => deleteSupplier(item.id)} style={styles.button} />
                       </View>
