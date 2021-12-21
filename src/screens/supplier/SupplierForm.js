@@ -35,9 +35,9 @@ const SupplierForm = ({ navigation }) => {
       validationSchema={ValidationSchema}
       initialValues={{
         id: "",
-        companyName: " ",
-        contactName: " ",
-        contactTitle: " ",
+        companyName: "",
+        contactName: "",
+        contactTitle: "",
       }}
       onSubmit={(values) => submitForm(values)}
     >

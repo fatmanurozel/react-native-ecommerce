@@ -13,18 +13,26 @@ const SupplierList = ({ navigation }) => {
   const [idSort, setIdSort] = useState(false)
 
   useEffect(() => {
-    setSupplier();
-  }, [])
-
-  const setSupplier = () => {
-    fetch('https://northwind.vercel.app/api/suppliers')
+    fetch("https://northwind.vercel.app/api/suppliers")
       .then((res) => res.json())
       .then(data => {
         setSupplierList(data)
         setLoading(true)
       })
-  }
 
+  }, [])
+
+  useEffect(() => {
+    getSuppliers()
+  }, [])
+
+  const getSuppliers = () => {
+    fetch('https://northwind.vercel.app/api/suppliers')
+      .then((res) => res.json())
+      .then((data) => {
+        setSupplierList(data);
+      })
+  }
   const deleteSupplier = (id) =>
     Alert.alert('I am deleting.. Are you sure?',
       [
@@ -44,7 +52,7 @@ const SupplierList = ({ navigation }) => {
             fetch('https://northwind.vercel.app/api/suppliers/' + id, requestOptions)
               .then((res) => res.json())
               .then(data => {
-                setSupplier()
+                getSuppliers()
               })
           }
         },
@@ -58,8 +66,8 @@ const SupplierList = ({ navigation }) => {
     fetch('https://northwind.vercel.app/api/suppliers')
       .then((res) => res.json())
       .then(data => {
-        var filteredsuppliersByName = data.filter(q => q.companyName.toLowerCase().includes(companyName))
-        setSupplierList(filteredsuppliersByName)
+        var filtered = data.filter(q => q.companyName.toLowerCase().includes(companyName))
+        setSupplierList(filtered)
       })
   }
 
@@ -90,7 +98,11 @@ const SupplierList = ({ navigation }) => {
   return (
     <>
       {
-        loading == false ? (<View style={styles.loadingContainer}><ActivityIndicator size="large" color="#0000ff" /></View>)
+        loading == false ? (
+          <View style={styles.Activity}>
+            <ActivityIndicator size="xxlarge" color="#285abf" />
+          </View>
+        )
 
           : (
             <ScrollView>
