@@ -9,13 +9,16 @@ function HomeScreen() {
       {" "}
       <Swiper style={styles.wrapper} showsButtons={true}>
         <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
+          <Text style={styles.text}>Product</Text>
         </View>
         <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
+          <Text style={styles.text}>Order</Text>
         </View>
         <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
+          <Text style={styles.text}>Supplier</Text>
+        </View>
+        <View style={styles.slide4}>
+          <Text style={styles.text}>Category</Text>
         </View>
       </Swiper>
     </View>
@@ -36,13 +39,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#97CAE5",
+    backgroundColor: "#FFC79A",
   },
   slide3: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#92BBD9",
+    backgroundColor: "#FFAEFA",
+  },
+  slide4: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#A09AFF",
   },
   text: {
     color: "#fff",
