@@ -25,6 +25,12 @@ Gerekli paketleri yükleyin
 ```bash
   yarn add formik yup
 ```
+```bash
+  yarn add react-native-swiper
+```
+```bash
+  yarn add lodash
+```
 
 Sunucuyu çalıştırın
 
